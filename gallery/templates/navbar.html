@@ -1,0 +1,66 @@
+   <!-- Static navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+      <div class="col-sm-8 col-sm-offset-2">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'posts:list' %}">Photo_it:</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="{%  url 'posts:list' %}">Galeria</a></li>
+{#          <li><a href="{% url 'about' %}">About</a></li>#}
+            <li><a href="{% url 'contact' %}">Kontakt</a></li>
+          </ul>
+
+
+          <ul class="nav navbar-nav navbar-right">
+              {% if request.user.is_authenticated %}
+                <li><a>Witaj {{ user }}</a></li>
+                <li><a href="{% url 'logout' %}">Wyloguj się</a>
+                </li>
+              {% else %}
+                <li><a href="{% url 'auth:login' %}">Zaloguj się</a></li>
+              {% endif %}
+          </ul>
+</div>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+
+
+
+
+
+
+
+{##}
+{#    <div class="container-fluid">#}
+{#      <!-- Static navbar -->#}
+{#      <nav class="navbar navbar-default">#}
+{#        <div class="container">#}
+{#          <div class="navbar-header">#}
+{#            <a class="navbar-brand" href="{% url 'posts:list' %}">Photo_it:</a>#}
+{#          </div>#}
+{#          <div id="navbar" class="navbar-collapse collapse">#}
+{#            <ul class="nav navbar-nav">#}
+{#              <li><a href="{%  url 'posts:list' %}">Gallery</a></li>#}
+{#              <li><a href="{% url 'about' %}">About</a></li>#}
+{#              <li><a href="{% url 'contact' %}">Contact</a></li>#}
+{#            </ul>#}
+{#            <ul class="nav navbar-nav navbar-right">#}
+{#              {% if request.user.is_authenticated %}#}
+{#                <li><a>Witaj {{ user }}</a></li>#}
+{#                <li><a href="{% url 'logout' %}">Wyloguj się</a>#}
+{#                </li>#}
+{#              {% else %}#}
+{#                <li><a href="{% url 'auth:login' %}">Zaloguj się</a></li>#}
+{#              {% endif %}#}
+{##}
+{#            </ul>#}
+{#          </div><!--/.nav-collapse -->#}
+{#        </div><!--/.container-fluid -->#}
+{#      </nav>#}
+{#    </div>#}
+{##}
+{##}

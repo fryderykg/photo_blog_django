@@ -1,0 +1,21 @@
+{%  extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Log in" %}{% endblock %}
+
+{% block content %}
+<div class="col-sm-8 col-sm-offset-2">
+  <form method="post" action="">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" value="{% trans 'Log in' %}" />
+    <input type="hidden" name="next" value="/gallery/" />
+  </form>
+
+</div>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,42 @@
+{%  extends "base.html" %}
+
+{% block title %} {{ title }} {% endblock %}
+
+
+{% block content %}
+  <div class='col-sm-8 col-sm-offset-2' xmlns="http://www.w3.org/1999/html">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="thumbnail">
+          {% if photo.image %}
+            <img src="{{ photo.image.url }}" class='img-responsive' alt="{{ photo.title }}"/>
+          {% endif %}
+          <div class="caption">
+            <h3>{{ photo.title }} <small>Opublikowany: {{ photo.created_date|timesince }} temu przez {{ photo.author }}</small></h3>
+
+            {% if photo.text %}
+              <p>{{ photo.text|linebreaks|truncatechars:80 }}</p>
+            {% endif %}
+           {% if user.is_authenticated %}
+            <p>
+             <a href="{{ photo.get_absolute_url }}edit" class="btn btn-primary">Edit</a>
+             <a href="{{ photo.get_absolute_url }}delete" class="btn btn-danger pull-right" role="button">Usuń</a>
+            </p>
+              <Facebook>
+                <div class="fb-like" data-href="{{ request.build_absolute_uri }}" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+              </Facebook>
+             <p><div class="fb-comments" data-href="{{ request.build_absolute_uri }}" data-numposts="6"></div></p>
+           {% endif %}
+          </div>
+        </div>
+      </div>
+      </div>
+  </div>
+
+
+
+
+
+
+{% endblock %}
+
