@@ -21,8 +21,8 @@ from gallery import views
 
 
 urlpatterns = [
-    # url(r'^admin/', admin.site.urls),
-    url(r'gallery/', include('gallery.urls', namespace='posts')),
+    url(r'^admin/', admin.site.urls),
+    url(r'', include('gallery.urls', namespace='posts')),
     url(r'^contact/', views.contact, name='contact'),
     url(r'^about/', views.about, name='about'),
     url(r'^auth/logout/', views.logout_view, name='logout'),

@@ -104,7 +104,7 @@ def contact(request):
         subject = 'Site contact from %s' % form_full_name
         message = '%s, \n\n %s \n %s' % (form_message, form_full_name, form_email)
         from_email = settings.EMAIL_HOST_USER
-        to_email = [abialczak@interia.pl]
+        to_email = ['abialczak@interia.pl']
         send_mail(subject, message, from_email, to_email, fail_silently=True)
         messages.success(request, 'Wiadomość wysłana')
         return redirect("posts:list")
