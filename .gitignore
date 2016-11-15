@@ -1,0 +1,12 @@
+venv
+settings.py
+__pycache__
+*.pyc
+db.sqlite3
+static
+.DS_Store
+.idea
+media_cdn
+static_cdn
+migrations
+pass_db.py
