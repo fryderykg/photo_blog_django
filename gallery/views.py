@@ -119,6 +119,7 @@ def about(request):
     return render(request, 'about.html', {})
 
 
+@login_required()
 def logout_view(request):
     logout(request)
     return redirect("posts:list")
