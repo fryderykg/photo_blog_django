@@ -1,15 +1,18 @@
 {%  extends "base.html" %}
 {% load staticfiles %}
 
+
 {% block title %} {{ title }} {% endblock %}
 
 {% block content %}
+<div class='col-sm-12'>
 
-  <div class='col-sm-12'>
 
+
+  <div class="row">
     {% for photo in photos_list %}
-    <div class="row">
-      <div class="col-sm-12">
+      {#    <div class="row">#}
+      <div class="col-sm-6">
         <div class="thumbnail">
           {% if photo.image %}
             <a href="{{ photo.get_absolute_url }}">
@@ -25,10 +28,11 @@
           </div>
         </div>
       </div>
-      </div>
-{#      {% cycle "" "</div><div class='row'>" %}#}
+{#      </div>#}
+      {% cycle "" "</div><div class='row'>" %}
     {% endfor %}
-
+</div>
+  </div>
 
   <div class="pagination">
     <span class="step-links">
@@ -47,6 +51,6 @@
   </div>
 
 
-</div>
+
 {% endblock %}
 
