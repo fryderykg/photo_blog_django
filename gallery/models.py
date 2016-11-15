@@ -5,37 +5,32 @@ from django.utils import timezone
 from django.utils.text import slugify
 from PIL import Image
 
-# # Create your models here.
 
-
+# Create your models here.
 class Post(models.Model):
-    author = models.ForeignKey('auth.User', default=1, verbose_name="Autor")
-    title = models.CharField(max_length=120, verbose_name="Tytuł")
+    author = models.ForeignKey('auth.User', default='request.user', verbose_name="Autor")
+    title = models.CharField(blank=False, null=False, max_length=120, verbose_name="Tytuł")
     slug = models.SlugField(unique=True)
     text = models.TextField(blank=True, null=True, verbose_name="Opis")
-    created_date = models.DateField(default=timezone.now, verbose_name="Data zdjęcia")
+    created_date = models.DateTimeField(default=timezone.now, verbose_name="Data zdjęcia")
     private = models.BooleanField(default=False, verbose_name="Prywatne")
     image = models.ImageField(upload_to='images',
                               blank=True, null=True,
-                              width_field='width_field',
-                              height_field='height_field',
                               verbose_name="Zdjęcie")
-    height_field = models.IntegerField(default=0)
-    width_field = models.IntegerField(default=0)
+    thumbnail = models.ImageField(upload_to='images',
+                                  blank=True, null=True,
+                                  verbose_name='Miniatura')
 
     def save(self):
         super(Post, self).save()    # save instance
 
         self.image.open()           # reopen the image
         image = Image.open(self.image)
-        width, height = image.width, image.height
-
-        if width > 960 or height > 960:     # crop image to max 960 px
-            if width > height:
-                factor = width / 960
-            else:
-                factor = height / 960
-        else:                               # if image is smaller then no crop
+        (width, height) = image.size
+        longer_side = max(image.size)
+        if longer_side > 960:     # crop image to max 960 px
+            factor = longer_side / 960
+        else:                     # if image is smaller then no crop
             factor = 1
 
         new_size = (int(width / factor), int(height / factor))

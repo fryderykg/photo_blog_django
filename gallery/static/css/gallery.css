@@ -48,5 +48,6 @@ a {
 }
 
 .button_create {
-    padding-top: 70px;
+    /*padding-top: 10px;*/
+    padding-bottom: 10px;
 }
