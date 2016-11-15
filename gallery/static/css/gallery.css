@@ -1,0 +1,52 @@
+.navbar-default {
+    border-color: #00b8ff;
+    font-family: Coiny;
+    font-size: large;
+}
+
+.navbar-header {
+    font-family: Coiny;
+    font-size: 20px;
+}
+
+.navbar-default .navbar-brand {
+    color: black;
+    font-size: 25px;
+}
+
+.jumbotron{
+    background-color: gainsboro;
+    border-color: #00b8ff;
+    font-family: Coiny;
+    padding-bottom: 0px;
+    padding-top: 0px;
+}
+
+.jumbo_title {
+    color: #00b8ff;
+}
+
+.navbar-fixed-bottom, .navbar-fixed-top, .navbar-static-top{
+    background-color: gainsboro;
+    border-color: #00b8ff;
+    background-image: none;
+}
+
+.navbar{
+    margin-bottom: 0px;
+}
+
+body{
+    font-family: Roboto;
+}
+a {
+    font-family: Coiny;
+}
+
+.thumbnail{
+    border-color: #00b8ff;
+}
+
+.button_create {
+    padding-top: 70px;
+}
