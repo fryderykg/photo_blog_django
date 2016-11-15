@@ -22,7 +22,7 @@ from gallery import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', views.post_list, name='list'),
+    url(r'^$', views.post_list, name='list'),
     url(r'^gallery/', include('gallery.urls', namespace='posts')),
     url(r'^contact/', views.contact, name='contact'),
     url(r'^about/', views.about, name='about'),
