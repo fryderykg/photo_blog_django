@@ -3,10 +3,9 @@ from django.db import models
 from django.db.models.signals import pre_save
 from django.utils import timezone
 from django.utils.text import slugify
+from PIL import Image
 
 # # Create your models here.
-# def upload_location(instance, filename):
-#     return "%s/%s" % (instance.pk, filename)
 
 
 class Post(models.Model):
@@ -23,6 +22,31 @@ class Post(models.Model):
                               verbose_name="Zdjęcie")
     height_field = models.IntegerField(default=0)
     width_field = models.IntegerField(default=0)
+
+    def save(self):
+        super(Post, self).save()    # save instance
+
+        self.image.open()           # reopen the image
+        image = Image.open(self.image)
+        width, height = image.width, image.height
+
+        if width > 960 or height > 960:     # crop image to max 960 px
+            if width > height:
+                factor = width / 960
+            else:
+                factor = height / 960
+        else:                               # if image is smaller then no crop
+            factor = 1
+
+        new_size = (int(width / factor), int(height / factor))
+        image = image.resize(new_size, Image.ANTIALIAS)
+        image.save(self.image.path)
+
+    def delete(self):
+        storage, path = self.image.storage, self.image.path
+        print(storage, path)            # image object and path to it
+        super(Post, self).delete()      # delete instance
+        storage.delete(path)            # delete image file
 
     def __str__(self):
         return self.title
