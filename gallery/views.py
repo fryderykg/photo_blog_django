@@ -20,7 +20,8 @@ def post_create(request):
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        messages.success(request, 'Dodano nowy wpis')
+
+        # messages.success(request, 'Dodano nowy wpis')
         return HttpResponseRedirect(instance.get_absolute_url())
 
     context = {
@@ -55,8 +56,12 @@ def post_list(request):
     return render(request, 'post_list.html', context)
 
 
-def post_detail(request, slug):
-    instance = get_object_or_404(Post, slug=slug)
+def post_detail(request, slug, year, month, day):
+    instance = get_object_or_404(Post,
+                                 slug=slug,
+                                 created_date__year=year,
+                                 created_date__month=month,
+                                 created_date__day=day)
     share_title = quote(instance.title)
     share_text = quote(instance.text)
 
@@ -70,13 +75,17 @@ def post_detail(request, slug):
 
 
 @login_required()
-def post_update(request, slug):
-    instance = get_object_or_404(Post, slug=slug)
+def post_update(request, slug, year, month, day):
+    instance = get_object_or_404(Post,
+                                 slug=slug,
+                                 created_date__year=year,
+                                 created_date__month=month,
+                                 created_date__day=day)
     form = PostForm(request.POST or None, request.FILES or None, instance=instance)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
-        messages.success(request, 'Wpis został zaktualizowany')
+        # messages.success(request, 'Wpis został zaktualizowany')
         return HttpResponseRedirect(instance.get_absolute_url())
 
     context = {
@@ -88,10 +97,14 @@ def post_update(request, slug):
 
 
 @login_required()
-def post_delete(request, slug):
-    instance = get_object_or_404(Post, slug=slug)
+def post_delete(request, slug, year, month, day):
+    instance = get_object_or_404(Post,
+                                 slug=slug,
+                                 created_date__year=year,
+                                 created_date__month=month,
+                                 created_date__day=day)
     instance.delete()
-    messages.success(request, 'Wpis został usunięty')
+    # messages.success(request, 'Wpis został usunięty')
     return redirect("posts:list")
 
 
@@ -106,7 +119,7 @@ def contact(request):
         from_email = settings.EMAIL_HOST_USER
         to_email = ['abialczak@interia.pl']
         send_mail(subject, message, from_email, to_email, fail_silently=True)
-        messages.success(request, 'Wiadomość wysłana')
+        # messages.success(request, 'Wiadomość wysłana')
         return redirect("posts:list")
 
     context = {
