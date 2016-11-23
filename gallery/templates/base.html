@@ -50,8 +50,8 @@
         <p>Blog fotograficzny dnia codziennego.</p>
         </div>
       {% if request.user.is_authenticated %}
-        <div class="col-sm-2 col-sm-offset-1 button_create">
-           <a href="{% url 'posts:create' %}" class="btn btn-primary">Dodaj wpis</a>
+        <div class="col-sm-10 col-sm-offset-1 button_create">
+           <a href="{% url 'posts:create' %}" class="btn btn-primary btn-block">Dodaj wpis</a>
         </div>
       {% endif %}
 
