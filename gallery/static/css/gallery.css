@@ -1,5 +1,5 @@
 .navbar-default {
-    border-color: #00b8ff;
+    border-color: #1C8595;
     font-family: Coiny;
     font-size: large;
 }
@@ -16,19 +16,19 @@
 
 .jumbotron{
     background-color: gainsboro;
-    border-color: #00b8ff;
+    border-color: #1C8595;
     font-family: Coiny;
     padding-bottom: 0px;
     padding-top: 0px;
 }
 
 .jumbo_title {
-    color: #00b8ff;
+    color: #1C8595;
 }
 
 .navbar-fixed-bottom, .navbar-fixed-top, .navbar-static-top{
     background-color: gainsboro;
-    border-color: #00b8ff;
+    border-color: #1C8595;
     background-image: none;
 }
 
@@ -44,7 +44,7 @@ a {
 }
 
 .thumbnail{
-    border-color: #00b8ff;
+    border-color: #1C8595;
 }
 
 .button_create {
