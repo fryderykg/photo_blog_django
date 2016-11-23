@@ -10,9 +10,10 @@ from PIL import Image
 class Post(models.Model):
     author = models.ForeignKey('auth.User', default='request.user', verbose_name="Autor")
     title = models.CharField(blank=False, null=False, max_length=120, verbose_name="Tytuł")
-    slug = models.SlugField(unique=True)
+    slug = models.SlugField(max_length=250, unique_for_date='created_date')
     text = models.TextField(blank=True, null=True, verbose_name="Opis")
-    created_date = models.DateTimeField(default=timezone.now, verbose_name="Data zdjęcia")
+    created_date = models.DateTimeField(auto_now_add=True, verbose_name="Data zdjęcia")
+    updated_date = models.DateTimeField(auto_now=True, verbose_name="Data edycji")
     private = models.BooleanField(default=False, verbose_name="Prywatne")
     image = models.ImageField(upload_to='images',
                               blank=True, null=True,
@@ -39,18 +40,22 @@ class Post(models.Model):
 
     def delete(self):
         storage, path = self.image.storage, self.image.path
-        print(storage, path)            # image object and path to it
+        # print(storage, path)            # image object and path to it
         super(Post, self).delete()      # delete instance
         storage.delete(path)            # delete image file
 
-    def __str__(self):
-        return self.title
-
     def get_absolute_url(self):
-        return reverse('posts:detail', kwargs={'slug': self.slug})
+        return reverse('posts:detail',
+                       args=[self.created_date.year,
+                             self.created_date.strftime('%m'),
+                             self.created_date.strftime('%d'),
+                             self.slug])
 
     class Meta:
         ordering = ['-created_date']
+
+    def __str__(self):
+        return self.title
 
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
