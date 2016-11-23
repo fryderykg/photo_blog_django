@@ -10,7 +10,6 @@ class PostForm(forms.ModelForm):
             "title",
             "text",
             "image",
-            "created_date",
             "author",
             "private",
         ]
