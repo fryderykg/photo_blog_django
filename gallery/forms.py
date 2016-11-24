@@ -15,7 +15,7 @@ class PostForm(forms.ModelForm):
             "private",
         ]
         widgets = {
-            'created_date': forms.SelectDateWidget
+            'created_date': forms.DateTimeInput
         }
 
 
