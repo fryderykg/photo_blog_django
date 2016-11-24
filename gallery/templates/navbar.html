@@ -12,7 +12,6 @@
             <li><a href="{% url 'contact' %}">Kontakt</a></li>
           </ul>
 
-
           <ul class="nav navbar-nav navbar-right">
               {% if request.user.is_authenticated %}
                 <li><a>Witaj {{ user }}</a></li>
