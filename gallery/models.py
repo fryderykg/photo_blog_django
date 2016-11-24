@@ -12,7 +12,7 @@ class Post(models.Model):
     title = models.CharField(blank=False, null=False, max_length=120, verbose_name="Tytuł")
     slug = models.SlugField(max_length=250, unique_for_date='created_date')
     text = models.TextField(blank=True, null=True, verbose_name="Opis")
-    created_date = models.DateTimeField(auto_now_add=True, verbose_name="Data zdjęcia")
+    created_date = models.DateTimeField(default=timezone.now, verbose_name="Data zdjęcia")
     updated_date = models.DateTimeField(auto_now=True, verbose_name="Data edycji")
     private = models.BooleanField(default=False, verbose_name="Prywatne")
     image = models.ImageField(upload_to='images',
